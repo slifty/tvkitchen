@@ -1,0 +1,46 @@
+{
+  "name": "node-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:slifty/node-template.git",
+  "author": "Dan Schultz <slifty@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn dev:start",
+    "dev:start": "nodemon --ignore lib --exec babel-node src/server",
+    "prod:build": "rimraf lib && babel src -d lib --ignore .test.js",
+    "prod:start": "cross-env NODE_ENV=production pm2 start lib/server && pm2 logs",
+    "prod:stop": "pm2 delete server",
+    "test": "eslint src && jest --coverage",
+    "precommit": "yarn test",
+    "prepush": "yarn test && yarn prod:build"
+  },
+  "browserslist": [
+    "> 1%"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.2",
+    "babel-jest": "^21.2.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "cross-env": "^5.1.1",
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-compat": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "flow-bin": "^0.59.0",
+    "husky": "^0.14.3",
+    "jest": "^21.2.1",
+    "nodemon": "^1.12.1",
+    "pm2": "^2.7.2",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "compression": "^1.7.1",
+    "express": "^4.16.2"
+  }
+}
